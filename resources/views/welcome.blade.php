@@ -9,9 +9,15 @@
     </head>
     <body>
         <div id="app">
-            <router-link to="/" exact>Home</router-link>
-            <router-link to="/about">About</router-link>
-            <router-view></router-view>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <router-link to="/" exact>Home</router-link>
+                        <router-link to="/about">About</router-link>
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>
