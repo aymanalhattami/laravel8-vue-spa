@@ -2,13 +2,17 @@
   <div class="home">
         <h2>Home View</h2>
         <div v-for="status in statuses">
-            <p>{{ status.user.name }}</p>
+            <p><strong>Posted on:</strong> {{ postedOn(status) }}, <strong>by: </strong> {{ status.user.name }}</p>
             <p>{{ status.body }}</p>
+            <hr>
         </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+import Status from '../models/Status.js';
+
 export default {
     name: "Home",
 
@@ -19,7 +23,14 @@ export default {
     },
 
     created(){
-        axios.get('http://127.0.0.1:8000/statuses').then(response => this.statuses = response.data);
+        // axios.get('/statuses').then(response => this.statuses = response.data); // or
+        Status.all().then(({data}) => this.statuses = data);
+    },
+
+    methods: {
+        postedOn(status){
+            return moment(status.created_at).fromNow();
+        }
     }
 };
 </script>
