@@ -1982,8 +1982,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Home"
+  name: "Home",
+  data: function data() {
+    return {
+      statuses: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('http://127.0.0.1:8000/statuses').then(function (response) {
+      return _this.statuses = response.data;
+    });
+  }
 });
 
 /***/ }),
@@ -2504,16 +2520,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "home" },
+    [
+      _c("h2", [_vm._v("Home View")]),
+      _vm._v(" "),
+      _vm._l(_vm.statuses, function(status) {
+        return _c("div", [
+          _c("p", [_vm._v(_vm._s(status.user.name))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(status.body))])
+        ])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "home" }, [_c("h2", [_vm._v("Home View")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
